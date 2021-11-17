@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Plane.gd" type="Script" id=1]
+
+[sub_resource type="BoxShape" id=1]
+
+[node name="World" type="Spatial"]
+
+[node name="Plane" type="Spatial" parent="."]
+script = ExtResource( 1 )
+
+[node name="Camera" type="Camera" parent="Plane"]
+transform = Transform( 1, 0, 0, 0, 0.961329, 0.275402, 0, -0.275402, 0.961329, 0, 2.14673, 4.0261 )
+
+[node name="Position3D" type="Position3D" parent="Plane"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.04229 )
+
+[node name="RigidBody" type="RigidBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
+shape = SubResource( 1 )
