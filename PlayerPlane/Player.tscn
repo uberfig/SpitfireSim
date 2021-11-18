@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/spitfire.tscn" type="PackedScene" id=1]
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 11.6351, 2.40119, 10.9336 )
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 1.92811
+height = 20.2036
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 11.4022, 0.497332, 2.81039 )
+
+[sub_resource type="CylinderShape" id=4]
+radius = 0.296191
+height = 0.160816
+
+[node name="Player" type="Spatial"]
+
+[node name="Spitfire" type="RigidBody" parent="."]
+
+[node name="spitfire" parent="Spitfire" instance=ExtResource( 1 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spitfire"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.27386, 0.466522 )
+shape = SubResource( 2 )
+
+[node name="Fuselage" type="Area" parent="Spitfire"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Spitfire/Fuselage"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6917, -0.804138 )
+shape = SubResource( 1 )
+
+[node name="Wings" type="Area" parent="Spitfire"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spitfire/Wings"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271399, 1.91555 )
+shape = SubResource( 3 )
+
+[node name="Camera" type="Camera" parent="Spitfire"]
+transform = Transform( -1, 0, -8.74228e-08, -3.72159e-08, 0.904864, 0.4257, 7.91057e-08, 0.4257, -0.904864, 0, 10.43, -17.9515 )
+current = true
+
+[node name="LWheel" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38364, -2.296, 4.289 )
+
+[node name="CollisionShape" type="CollisionShape" parent="LWheel"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="RWheel" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.46116, -2.296, 4.289 )
+
+[node name="CollisionShape" type="CollisionShape" parent="RWheel"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="rear" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.518508, -10.9113 )
+
+[node name="CollisionShape" type="CollisionShape" parent="rear"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 4 )
