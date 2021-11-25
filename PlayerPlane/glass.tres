@@ -1,0 +1,46 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, ambient_light_disabled;
+
+uniform vec4 Color : hint_color;
+uniform float Shine = 0.2;
+uniform float Roughness = 0.2;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// ColorUniform:6
+	vec3 n_out6p0 = Color.rgb;
+	float n_out6p1 = Color.a;
+
+// ScalarUniform:3
+	float n_out3p0 = Shine;
+
+// ScalarUniform:4
+	float n_out4p0 = Roughness;
+
+// Output:0
+	ALBEDO = n_out6p0;
+	ALPHA = n_out6p1;
+	METALLIC = n_out3p0;
+	ROUGHNESS = n_out4p0;
+
+}
+
+void light() {
+// Output:0
+
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/Color = Color( 0.470588, 0.670588, 0.929412, 1 )
+shader_param/Shine = 0.2
+shader_param/Roughness = 0.2

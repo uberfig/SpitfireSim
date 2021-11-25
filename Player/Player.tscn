@@ -1,0 +1,188 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Player/Camera.gd" type="Script" id=2]
+[ext_resource path="res://Player/HUD.gd" type="Script" id=5]
+
+[sub_resource type="CapsuleShape" id=4]
+radius = 0.75
+height = 1.5
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.266667, 0.764706, 0.2, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.780392, 0.262745, 0.180392, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=9]
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
+
+[node name="Player" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49224, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="Camroot" type="Spatial" parent="."]
+script = ExtResource( 2 )
+
+[node name="h" type="Spatial" parent="Camroot"]
+
+[node name="v" type="Spatial" parent="Camroot/h"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41498, 0 )
+
+[node name="Camera" type="Camera" parent="Camroot/h/v"]
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer" groups=["HUD"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PopupScorePanel" type="Panel" parent="CanvasLayer/HUD"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -93.0
+margin_top = -27.0
+margin_right = 93.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD/PopupScorePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "You scored!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreDisplay" type="Timer" parent="CanvasLayer/HUD"]
+wait_time = 2.0
+one_shot = true
+
+[node name="ScorePanel" type="Panel" parent="CanvasLayer/HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -103.0
+margin_right = 103.0
+margin_bottom = 69.0
+custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/HUD/ScorePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 40
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Friendly" type="Label" parent="CanvasLayer/HUD/ScorePanel/HBox"]
+margin_left = 75.0
+margin_top = 27.0
+margin_right = 83.0
+margin_bottom = 41.0
+custom_colors/font_color = Color( 0.0666667, 0.843137, 0.0941176, 1 )
+text = "0"
+
+[node name="Opponent" type="Label" parent="CanvasLayer/HUD/ScorePanel/HBox"]
+margin_left = 123.0
+margin_top = 27.0
+margin_right = 131.0
+margin_bottom = 41.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "0"
+
+[node name="StatsPanel" type="Panel" parent="CanvasLayer/HUD"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -109.0
+margin_right = 342.0
+custom_styles/panel = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/HUD/StatsPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_right = -20.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer/HUD/StatsPanel/VBox"]
+margin_top = 20.0
+margin_right = 302.0
+margin_bottom = 34.0
+text = "Health"
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HUD/StatsPanel/VBox"]
+margin_top = 38.0
+margin_right = 302.0
+margin_bottom = 52.0
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+value = 50.0
+rounded = true
+
+[node name="StamanaLabel" type="Label" parent="CanvasLayer/HUD/StatsPanel/VBox"]
+margin_top = 56.0
+margin_right = 302.0
+margin_bottom = 70.0
+text = "Stamana"
+
+[node name="StamanaBar" type="ProgressBar" parent="CanvasLayer/HUD/StatsPanel/VBox"]
+margin_top = 74.0
+margin_right = 302.0
+margin_bottom = 88.0
+custom_styles/fg = SubResource( 9 )
+custom_styles/bg = SubResource( 10 )
+value = 50.0
+
+[connection signal="timeout" from="CanvasLayer/HUD/ScoreDisplay" to="CanvasLayer/HUD" method="_on_ScoreDisplay_timeout"]
